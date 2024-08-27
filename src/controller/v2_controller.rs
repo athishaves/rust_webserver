@@ -15,7 +15,7 @@ pub struct V2Controller;
 )]
 impl V2Controller {
     #[route("GET", "/")]
-    async fn root_handler<B>(request: Request<B>) -> impl IntoResponse {
+    pub async fn root_handler<B>(request: Request<B>) -> impl IntoResponse {
         let trace_id = request.headers().get("trace_id");
         println!("Trace ID: {:?}", trace_id);
 
@@ -26,7 +26,7 @@ impl V2Controller {
     }
 
     #[route("POST", "/echo/:message")]
-    async fn echo_handler<B>(
+    pub async fn echo_handler<B>(
         Path(message): Path<String>,
         request: Request<B>,
     ) -> impl IntoResponse {
@@ -40,7 +40,7 @@ impl V2Controller {
     }
 
     #[route("GET", "/test")]
-    async fn test_handler<B>(request: Request<B>) -> impl IntoResponse {
+    pub async fn test_handler<B>(request: Request<B>) -> impl IntoResponse {
         let trace_id = request.headers().get("trace_id");
         println!("Trace ID: {:?}", trace_id);
 

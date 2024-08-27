@@ -10,7 +10,7 @@ pub struct V1Controller;
 #[controller(path = "/v1")]
 impl V1Controller {
     #[route("GET", "/")]
-    async fn root_handler<B>(request: Request<B>) -> impl IntoResponse {
+    pub async fn root_handler<B>(request: Request<B>) -> impl IntoResponse {
         let user_agent = request.headers().get("trace_id");
         println!("User-Agent: {:?}", user_agent);
 
@@ -21,7 +21,7 @@ impl V1Controller {
     }
 
     #[route("POST", "/echo/:message")]
-    async fn echo_handler<B>(
+    pub async fn echo_handler<B>(
         Path(message): Path<String>,
         request: Request<B>,
     ) -> impl IntoResponse {
@@ -35,7 +35,7 @@ impl V1Controller {
     }
 
     #[route("GET", "/test")]
-    async fn test_handler<B>(request: Request<B>) -> impl IntoResponse {
+    pub async fn test_handler<B>(request: Request<B>) -> impl IntoResponse {
         let user_agent = request.headers().get("trace_id");
         println!("User-Agent: {:?}", user_agent);
 
